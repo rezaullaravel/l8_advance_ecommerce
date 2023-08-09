@@ -12,21 +12,13 @@ use App\Http\Controllers\Admin\WarehouseController;
 use App\Http\Controllers\Admin\PickupPointController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\ChildcategoryController;
+use App\Http\Controllers\Frontend\FrontendHomeController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+
+
 
 Auth::routes();
 
@@ -114,6 +106,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     //product
     Route::get('/product/add',[ProductController::class,'add']);
     Route::post('/product/store',[ProductController::class,'store']);
+    Route::get('/product/edit/{id}',[ProductController::class,'edit']);
+    Route::get('/product/delete/{id}',[ProductController::class,'delete']);
+    Route::post('/product/update',[ProductController::class,'update']);
     Route::get('/product/manage',[ProductController::class,'manage']);
     Route::get('/product/filter/by-category',[ProductController::class,'filterBycategory']);
     Route::get('/product/filter/by-brand',[ProductController::class,'filterByBrand']);
@@ -124,6 +119,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/product-featured/active/{id}',[ProductController::class,'productFeaturedActive']);
     Route::get('/today-deal/deactive/{id}',[ProductController::class,'productDealDeactive']);
     Route::get('/today-deal/active/{id}',[ProductController::class,'productDealActive']);
+    Route::get('/multiImg/delete/{id}',[ProductController::class,'ProductMultiImgDelete']);
 
 
 });
@@ -131,5 +127,18 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 /*================================= Admin all route end =======================================================*/
 
 
+/*===================================== Frontend all route start   ==============================================*/
+/*===================================== Frontend all route end   ==============================================*/
 
+//home page
+Route::get('/',[FrontendHomeController::class,'index']);
 
+//product single page
+Route::get('/product/single/{id}',[FrontendHomeController::class,'productSingle']);
+
+//category wise product view
+Route::get('/category-wise/product/show/{id}',[FrontendHomeController::class,'categoryWiseProductShow'])->name('category-wise/product/show');
+//subcategory wise product view
+Route::get('/subcategory-wise/product/show/{id}',[FrontendHomeController::class,'subcategoryWiseProductShow'])->name('subcategory-wise/product/show');
+//childcategory wise product view
+Route::get('/childcategory-wise/product/show/{id}',[FrontendHomeController::class,'childcategoryWiseProductShow'])->name('childcategory-wise/product/show');

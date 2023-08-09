@@ -67,7 +67,15 @@
                                         <td>{{ $key+1 }}</td>
                                        <td>{{ $product->name }}</td>
                                        <td>{{ $product->category->category_name }}</td>
-                                       <td>{{ $product->subcategory->subcategory_name }}</td>
+                                       <td>
+                                        @if ($product->subcategory)
+
+                                         {{ $product->subcategory->subcategory_name }}
+
+                                        @else
+
+                                        @endif
+                                       </td>
                                        <td>
 
                                         <?php
@@ -107,8 +115,8 @@
                                        </td>
 
                                         <td>
-                                            <a href="{{-- route('admin.brand.edit',$brand->id) --}}" class="btn btn-success btn-sm" title="edit"><i class="fa fa-pen"></i></a>
-                                            <a href="{{-- route('admin.brand.delete',$brand->id) --}}" class="btn btn-danger btn-sm" onclick="confirmation(event)" title="delete"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ url('admin/product/edit',$product->id) }}" class="btn btn-success btn-sm" title="edit"><i class="fa fa-pen"></i></a>
+                                            <a href="{{ url('admin/product/delete',$product->id) }}" class="btn btn-danger btn-sm" onclick="confirmation(event)" title="delete"><i class="fa fa-trash"></i></a>
                                         </td>
                                       </tr>
 
