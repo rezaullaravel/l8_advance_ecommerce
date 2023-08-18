@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Review;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Subcategory;
@@ -15,15 +16,18 @@ class FrontendHomeController extends Controller
     public function index(){
         $categories = Category::all();
         $products = Product::where('status',1)->orderBy('id','desc')->limit(8)->get();
-        $featuredProducts = Product::where('featured',1)->orderBy('id','desc')->limit(8)->get();
-        return view('frontend.home.index',compact('categories','products','featuredProducts'));
+        $featuredProducts = Product::where('status',1)->where('featured',1)->orderBy('id','desc')->limit(8)->get();
+        $popularProducts = Product::where('status',1)->orderBy('product_view','desc')->limit(8)->get();
+        return view('frontend.home.index',compact('categories','products','featuredProducts','popularProducts'));
     }//end method
 
 
     //product single page
     public function productSingle($id){
         $product = Product::find($id);
-        return view('frontend.product.product_single',compact('product'));
+                   Product::where('id',$id)->increment('product_view');
+        $product_reviews = Review::where('product_id',$product->id)->get();
+        return view('frontend.product.product_single',compact('product','product_reviews'));
     }//end method
 
 

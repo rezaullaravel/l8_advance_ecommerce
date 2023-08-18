@@ -9,10 +9,13 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\WarehouseController;
+use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Admin\PickupPointController;
 use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Admin\ChildcategoryController;
 use App\Http\Controllers\Frontend\FrontendHomeController;
+use App\Http\Controllers\Frontend\ShoppingCartController;
 
 
 
@@ -128,7 +131,6 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
 
 /*===================================== Frontend all route start   ==============================================*/
-/*===================================== Frontend all route end   ==============================================*/
 
 //home page
 Route::get('/',[FrontendHomeController::class,'index']);
@@ -142,3 +144,33 @@ Route::get('/category-wise/product/show/{id}',[FrontendHomeController::class,'ca
 Route::get('/subcategory-wise/product/show/{id}',[FrontendHomeController::class,'subcategoryWiseProductShow'])->name('subcategory-wise/product/show');
 //childcategory wise product view
 Route::get('/childcategory-wise/product/show/{id}',[FrontendHomeController::class,'childcategoryWiseProductShow'])->name('childcategory-wise/product/show');
+
+
+//product review by user
+Route::post('/product/review',[ReviewController::class,'reviewStore']);
+
+
+
+
+
+
+
+Route::middleware(['auth'])->group(function () {
+//add prodtuct to wishlist
+Route::post('/product/wishlist/store',[WishlistController::class,'store']);
+//wishlist view
+Route::get('/wishlist',[WishlistController::class,'wishlist']);
+Route::get('/wishlist-product/delete/{id}',[WishlistController::class,'wishlistProductDelete']);
+
+//shopping cart
+Route::get('/cart/view',[ShoppingCartController::class,'viewShoppingCart']);
+Route::post('/addTo/cart',[ShoppingCartController::class,'productAddToCart']);
+Route::post('/quantity/increment',[ShoppingCartController::class,'incrementQuantity']);
+Route::post('/quantity/decrement',[ShoppingCartController::class,'decrementQuantity']);
+Route::get('/cart-item/delete',[ShoppingCartController::class,'cartItemDelete']);
+Route::post('/addTocart-from/wishlist',[ShoppingCartController::class,'addTocartFromWishlist']);
+Route::post('/cart-color/update',[ShoppingCartController::class,'cartProductColorUpdate']);
+});
+
+
+/*===================================== Frontend all route end   ==============================================*/

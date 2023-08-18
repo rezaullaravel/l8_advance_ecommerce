@@ -17,7 +17,7 @@ Category Wise Product View
 <div class="content-top offer-w3agile">
    <div class="container ">
       <div class="spec ">
-         <h4>Category Name:</h4>
+         <h4>Category:</h4>
          <p style="margin-bottom: 10px;">{{ $category->category_name }}</p>
          <div class="ser-t">
             <b></b>
@@ -29,22 +29,22 @@ Category Wise Product View
 
            @if (count($products)>0)
            @foreach ( $products as  $product)
+           <a href="{{ url('/product/single',$product->id) }}"  class="offer-img">
                 <div class="col-md-3 pro-1">
                     <div class="col-m">
-                    <a href="{{ url('/product/single',$product->id) }}"  class="offer-img">
-                        <img src="{{ asset($product->thumbnail )}}" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="women">
-                            <p>{{ $product->name }}</p>
-                            <h6 style="margin:15px 0;">{{ $product->selling_price  }} TK.</h6>
-                        </div>
-                        <div class="add">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-id="5" data-name="Lays" data-summary="summary 5" data-price="0.70" data-quantity="1" data-image="images/of4.png">Add to Cart</button>
-                        </div>
-                    </div>
+
+                            <img src="{{ asset($product->thumbnail )}}" class="img-responsive" alt="">
+
+                            <div class="mid-1">
+                                <div class="women">
+                                    <p>{{ $product->name }}</p>
+                                    <h6 style="margin:15px 0;">{{ $product->selling_price  }} TK.</h6>
+                                </div>
+                            </div>
+
                     </div>
                 </div>
+            </a>
            @endforeach
            @else
               <h3 class="text-danger text-center">No Product Found.........</h3>

@@ -142,16 +142,31 @@
  <div class="header">
     <div class="container" style="text-align: center;">
        <div class="logo">
-          <h1 ><a href="index.html"><b>T<br>H<br>E</b>Big Store<span>The Best Supermarket</span></a></h1>
+          <h1 ><a href="{{ url('/') }}"><b>T<br>H<br>E</b>Big Store<span>The Best Supermarket</span></a></h1>
        </div>
        <div class="head_style">
           <div class="head-t">
              <ul class="card" style="float: left">
-                <li><a href="wishlist.html" ><i class="fa fa-heart" aria-hidden="true"></i>Wishlist</a></li>
-                <li><a href="login.html" ><i class="fa fa-user" aria-hidden="true"></i>Login</a></li>
-                <li><a href="register.html" ><i class="fa fa-arrow-right" aria-hidden="true"></i>Register</a></li>
+                <li><a href="{{ url('/wishlist') }}" ><i class="fa fa-heart" aria-hidden="true"></i>Wishlist
+                    @if (Auth::check())
+                    <span class="btn btn-sm btn-success">
+                        @php
+                            $wishlist_count = App\Models\Wishlist::where('user_id',Auth::user()->id)->count();
+                        @endphp
+                        {{ $wishlist_count }}
+                </span>
+                @endif
+            </a></li>
                 <li><a href="about.html" ><i class="fa fa-file-text-o" aria-hidden="true"></i>Order History</a></li>
                 <li><a href="shipping.html" ><i class="fa fa-ship" aria-hidden="true"></i>Shipping</a></li>
+
+               @if (!Auth::check())
+                    <li><a href="{{ url('/login') }}" ><i class="fa fa-user" aria-hidden="true"></i>Login</a></li>
+                    <li><a href="{{ url('/register') }}" ><i class="fa fa-arrow-right" aria-hidden="true"></i>Register</a></li>
+                @else
+                <li><a href="{{ url('/home') }}" ><i class="fa fa-arrow-right" aria-hidden="true"></i>Dashboard</a></li>
+               @endif
+
              </ul>
           </div>
        </div>
@@ -219,9 +234,19 @@
              {{-- menu start end --}}
           </nav>
           <div class="cart" >
-             <span class="fa fa-shopping-cart my-cart-icon"><span class="badge badge-notify my-cart-badge"></span></span>
+
+                <a href="{{ url('/cart/view') }}" class="btn btn-success" title="Shopping Cart"><i class="fa fa-shopping-cart"></i>
+                    <span class="cartCount">
+                        @if (Auth::check())
+                        @php
+                          $products =App\Models\ShoppingCart::where('user_id',Auth::user()->id)->count();
+                        @endphp
+                            {{ $products }}
+                        @endif
+                    </span>
+                </a>
           </div>
-          <div class="clearfix"></div>
+
        </div>
     </div>
  </div>
