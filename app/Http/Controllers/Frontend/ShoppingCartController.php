@@ -112,10 +112,22 @@ class ShoppingCartController extends Controller
     }//end method
 
 
+     //cart product size update
+     public function cartProductSizeUpdate(Request $request){
+        ShoppingCart::find($request->rowId)->update([
+            'size' => $request->size,
+        ]);
+
+        return response()->json([
+          'status' => 'Cart product size updated',
+        ]);
+    }//end method
 
 
-
-
-
+    //empty all cart item
+    public function emptyCart(){
+        ShoppingCart::where('user_id',Auth::user()->id)->delete();
+        return redirect()->back()->with('message','Shopping cart is empty now');
+    }//end method
 
 }//end class

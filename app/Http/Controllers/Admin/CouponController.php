@@ -34,7 +34,7 @@ class CouponController extends Controller
             'type' => $request->type,
             'amount' => $request->amount,
             'status' => $request->status,
-            'valid_date' => $request->valid_date,
+            'valid_date' => date('Y-m-d',strtotime($request->valid_date)),
         ]);
 
         return redirect()->back()->with('message','coupon  created successfully');
@@ -61,7 +61,7 @@ class CouponController extends Controller
             'type' => $request->type,
             'amount' => $request->amount,
             'status' => $request->status,
-            'valid_date' => $request->valid_date,
+            'valid_date' => date('Y-m-d',strtotime($request->valid_date)),
         ]);
 
         return redirect('/admin/coupon')->with('message','coupon  updated successfully');

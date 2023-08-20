@@ -56,7 +56,7 @@
 
                         <div class="form-group">
                             <label>Valid date</label>
-                            <input type="text" name="valid_date" class="form-control"  placeholder="Enter valid date">
+                            <input type="date" name="valid_date" class="form-control"  placeholder="Enter valid date">
                         </div>
                     </div>
                     <!-- /.card-body -->

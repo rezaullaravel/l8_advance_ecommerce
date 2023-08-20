@@ -91,7 +91,7 @@ Shopping Cart
                    </td>
 
                    <td class="t-data">
-                    <select name="size"  class="form-control size" required>
+                    <select name="size"  class="form-control size" data-id={{ $product->id }}>
                         <option value="1" {{ $product->size=='1'?'selected':'' }}>1</option>
                         <option value="2" {{ $product->size=='2'?'selected':'' }}>2</option>
                         <option value="3" {{ $product->size=='3'?'selected':'' }}>3</option>
@@ -118,6 +118,13 @@ Shopping Cart
            <h4 class="text-danger text-center">Your shopping card is empty</h4>
           @endif
           <h4 class="text-danger text-center cartProductempty" style="display: none;">Your shopping card is empty</h4>
+
+          <div>
+             <div class="form-group" style="float: right;">
+                <a href="{{ url('/cart/empty') }}" class="btn btn-info">Empty Cart</a>
+                <a href="{{ url('/checkout') }}" class="btn btn-danger">Checkout</a>
+             </div>
+          </div>
 
       @endif
    </div>
@@ -202,7 +209,7 @@ Shopping Cart
 {{-- delete cart item end --}}
 
 
-{{-- cart color change --}}
+{{-- cart product color change --}}
 <script>
     $(document).ready(function(){
        $(document).on('change','.color',function(){
@@ -254,4 +261,58 @@ Shopping Cart
     });
 
  </script>
-{{-- cart color change end --}}
+{{-- cart product color change end --}}
+
+{{-- cart product size update --}}
+<script>
+    $(document).ready(function(){
+       $(document).on('change','.size',function(){
+           let rowId = $(this).data('id');
+           let size = $(this).val();
+
+
+           //alert(size);
+
+           var data = {
+               _token: '{{csrf_token()}}',
+               'rowId':rowId,
+               'size':size,
+
+               }
+
+           $.ajax({
+               url:'/cart-product/size/update',
+               method:'POST',
+               data:data,
+
+
+               success:function(response){
+                  $('.table').load(location.href+' .table');
+                    //toastr start
+                    Command: toastr["success"](response.status)
+
+                    toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                    }
+                    //toastr start end
+               },
+           })
+       })
+    });
+
+ </script>
+{{-- cart product size update end --}}

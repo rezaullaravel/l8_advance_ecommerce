@@ -57,7 +57,7 @@
 
                         <div class="form-group">
                             <label>Valid date</label>
-                            <input type="text" name="valid_date" value="{{ $coupon->valid_date }}" class="form-control">
+                            <input type="date" name="valid_date" value="{{ $coupon->valid_date }}" class="form-control">
                         </div>
                     </div>
                     <!-- /.card-body -->

@@ -21,7 +21,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Custom Theme files -->
 <link href="{{ asset('/') }}frontend/css/style.css" rel='stylesheet' type='text/css' />
 <!-- js -->
-   {{-- <script src="{{ asset('/') }}frontend/js/jquery-1.11.1.min.js"></script> --}}
+   <script src="{{ asset('/') }}frontend/js/jquery-1.11.1.min.js"></script>
 <!-- //js -->
 <!-- start-smoth-scrolling -->
 <script type="text/javascript" src="{{ asset('/') }}frontend/js/move-top.js"></script>
@@ -206,7 +206,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 {{-- toastr notification end --}}
 
 {{-- another toastr js for ajax success message --}}
-<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+{{-- <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script> --}}
         <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
         {!! Toastr::message() !!}
 {{-- another toastr js for ajax success message end --}}
@@ -310,8 +310,6 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 
  </script>
 {{-- add to card from wishlist end --}}
-
-
 
 
 </body>

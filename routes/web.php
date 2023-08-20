@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\WarehouseController;
 use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Admin\PickupPointController;
 use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Admin\ChildcategoryController;
 use App\Http\Controllers\Frontend\FrontendHomeController;
@@ -150,15 +151,9 @@ Route::get('/childcategory-wise/product/show/{id}',[FrontendHomeController::clas
 Route::post('/product/review',[ReviewController::class,'reviewStore']);
 
 
-
-
-
-
-
+//wishlist
 Route::middleware(['auth'])->group(function () {
-//add prodtuct to wishlist
 Route::post('/product/wishlist/store',[WishlistController::class,'store']);
-//wishlist view
 Route::get('/wishlist',[WishlistController::class,'wishlist']);
 Route::get('/wishlist-product/delete/{id}',[WishlistController::class,'wishlistProductDelete']);
 
@@ -170,7 +165,14 @@ Route::post('/quantity/decrement',[ShoppingCartController::class,'decrementQuant
 Route::get('/cart-item/delete',[ShoppingCartController::class,'cartItemDelete']);
 Route::post('/addTocart-from/wishlist',[ShoppingCartController::class,'addTocartFromWishlist']);
 Route::post('/cart-color/update',[ShoppingCartController::class,'cartProductColorUpdate']);
+Route::post('/cart-product/size/update',[ShoppingCartController::class,'cartProductSizeUpdate']);
+Route::get('/cart/empty',[ShoppingCartController::class,'emptyCart']);
 });
 
+//checkout page
+Route::get('/checkout',[CheckoutController::class,'checkout']);
+Route::post('/apply/coupon',[CheckoutController::class,'applyCoupon']);
+Route::get('/coupon/remove',[CheckoutController::class,'removeCoupon']);
+Route::post('/place/order',[CheckoutController::class,'placeOrder']);
 
 /*===================================== Frontend all route end   ==============================================*/

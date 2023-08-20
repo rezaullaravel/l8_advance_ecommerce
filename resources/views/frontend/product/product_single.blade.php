@@ -25,7 +25,7 @@ Product Single Page
                <div id="picture-frame" style="height: 260px;">
                   <img src="{{ asset($product->thumbnail )}}" data-src="{{ asset($product->thumbnail) }}" alt="" class="img-responsive"/>
                </div>
-               <script src="{{ asset('') }}frontend/js/jquery.zoomtoo.js"></script>
+               <script src="{{ asset('/') }}frontend/js/jquery.zoomtoo.js"></script>
                <script>
                   $(function() {
                   	$("#picture-frame").zoomToo({
