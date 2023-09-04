@@ -142,7 +142,7 @@
  <div class="header">
     <div class="container" style="text-align: center;">
        <div class="logo">
-          <h1 ><a href="{{ url('/') }}"><b>T<br>H<br>E</b>Big Store<span>The Best Supermarket</span></a></h1>
+          <h1 ><a href="{{ url('/') }}" style="padding-left: 15px;"><b>T<br>H<br>E</b> Nice Store <span>The Best Supermarket</span></a></h1>
        </div>
        <div class="head_style">
           <div class="head-t">
