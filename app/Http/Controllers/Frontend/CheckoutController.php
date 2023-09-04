@@ -48,8 +48,13 @@ class CheckoutController extends Controller
 
     //remove coupon
     public function removeCoupon(){
-        Session::forget('coupon');
-        return redirect()->back()->with('message','Coupon removed successfully');
+        if(Session('coupon')){
+            Session::forget('coupon');
+            return redirect()->back()->with('message','Coupon removed successfully');
+        } else{
+            return redirect()->back()->with('error','You have not applied any coupon');
+        }
+
     }//end method
 
 

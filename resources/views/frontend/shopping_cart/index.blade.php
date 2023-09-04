@@ -11,6 +11,15 @@ Shopping Cart
    width: 27px;
    text-align: center;
    }
+   .card-sample {
+    width: 100%;
+  background: #F1F1F1;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #00000021;
+  overflow: hidden;
+}
+
 </style>
 <!--banner-->
 <div class="banner-top" style="margin-top: 15px;">
@@ -82,7 +91,7 @@ Shopping Cart
                   </td>
 
                   <td class="t-data">
-                    <select name="color"  class="form-control color" required data-id={{ $product->id }}>
+                    <select name="color" disabled class="form-control color" required data-id={{ $product->id }}>
                         <option value="" selected disabled>Select</option>
                         <option value="red" {{ $product->color=='red'?'selected':'' }}>Red</option>
                         <option value="green" {{ $product->color=='green'?'selected':'' }}>Green</option>
@@ -91,7 +100,7 @@ Shopping Cart
                    </td>
 
                    <td class="t-data">
-                    <select name="size"  class="form-control size" data-id={{ $product->id }}>
+                    <select name="size" disabled  class="form-control size" data-id={{ $product->id }}>
                         <option value="1" {{ $product->size=='1'?'selected':'' }}>1</option>
                         <option value="2" {{ $product->size=='2'?'selected':'' }}>2</option>
                         <option value="3" {{ $product->size=='3'?'selected':'' }}>3</option>
@@ -119,12 +128,15 @@ Shopping Cart
           @endif
           <h4 class="text-danger text-center cartProductempty" style="display: none;">Your shopping card is empty</h4>
 
-          <div>
-             <div class="form-group" style="float: right;">
-                <a href="{{ url('/cart/empty') }}" class="btn btn-info">Empty Cart</a>
-                <a href="{{ url('/checkout') }}" class="btn btn-danger">Checkout</a>
-             </div>
-          </div>
+
+            @if (count( $products)>0)
+            <div class="card-sample">
+                <div  style="float: right;">
+                    <a href="{{ url('/cart/empty') }}" class="btn btn-info">Empty Cart</a>
+                    <a href="{{ url('/checkout') }}" class="btn btn-danger">Checkout</a>
+                </div>
+            </div>
+            @endif
 
       @endif
    </div>

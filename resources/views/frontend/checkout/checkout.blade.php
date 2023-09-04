@@ -159,10 +159,14 @@ td, th {
                     <div style="margin-top: 10px;">
                         <p>Sub Total: <span style="float: right">{{ $subtotal }} TK.</span></p>
                         <p style="margin-top:5px;">Coupon(@if (Session('coupon'))
-                            {{ Session::get('coupon')['coupon_code'] }}
-                        @endif) <a href="{{ url('coupon/remove') }}" title="Remove Coupon"><span class="text-danger">x</span></a> <span style="float: right">@if (Session('coupon'))
-                            {{ Session::get('coupon')['amount'] }} TK.
-                        @endif</span></p>
+                                {{ Session::get('coupon')['coupon_code'] }}
+                            @endif) <a href="{{ url('coupon/remove') }}" title="Remove Coupon"><span class="text-danger">x</span></a>
+                            <span style="float: right">
+                                @if (Session('coupon'))
+                                {{ Session::get('coupon')['amount'] }} TK.
+                                @endif
+                            </span>
+                       </p>
 
                       <?php
                         if(Session('coupon')){
@@ -189,7 +193,7 @@ td, th {
                         @csrf
                             <div class="form-group">
                                 <label>Coupon Code</label>
-                                <input type="text" name="coupon_code" class="form-control" placeholder="Enter Coupon Code">
+                                <input type="text" name="coupon_code" class="form-control" placeholder="Enter Coupon Code" required>
                             </div>
 
                             <div class="form-group">

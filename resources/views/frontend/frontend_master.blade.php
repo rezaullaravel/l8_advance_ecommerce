@@ -239,6 +239,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
                    if(response.products==0){
                     $('.cartTable').hide();
                     $('.cartProductempty').show();
+                    $('.card-sample').hide();
                     //window.location.reload();
 
                    }
