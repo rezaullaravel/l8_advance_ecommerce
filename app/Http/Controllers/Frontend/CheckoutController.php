@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use Mail;
 use App\Models\Order;
 use App\Models\Coupon;
+use App\Mail\OrderMail;
 use App\Models\Orderdetails;
 use App\Models\ShoppingCart;
 use Illuminate\Http\Request;
@@ -18,7 +20,7 @@ class CheckoutController extends Controller
        if(Auth::check()){
         return view('frontend.checkout.checkout');
        } else{
-        return redirec()->back()->with('message','You have to login first');
+        return redirect()->back()->with('message','You have to login first');
        }
     }//end method
 
@@ -61,48 +63,49 @@ class CheckoutController extends Controller
     //place order
     public function placeOrder(Request $request){
 
+        $data = [];
         //order insert
-        $order = new Order();
-          $order->user_id = Auth::user()->id;
+          $data['user_id'] = Auth::user()->id;
 
-          $order->c_name = Auth::user()->name;
+          $data['c_name'] = Auth::user()->name;
 
-          $order->c_phone = $request->c_phone;
+          $data['c_phone'] = $request->c_phone;
 
-          $order->c_country = $request->c_country;
+          $data['c_country'] = $request->c_country;
 
-          $order->c_shipping_address = $request->c_shipping_address;
+          $data['c_shipping_address'] = $request->c_shipping_address;
 
-          $order->c_email = $request->c_email;
+          $data['c_email'] = $request->c_email;
 
-          $order->c_zipcode = $request->c_zipcode;
+          $data['c_zipcode'] = $request->c_zipcode;
 
-          $order->c_extra_phone = $request->c_extra_phone;
+          $data['c_extra_phone'] = $request->c_extra_phone;
 
-          $order->c_city = $request->c_city;
+          $data['c_city'] = $request->c_city;
 
          if(Session('coupon')){
-            $order->coupon_code = Session::get('coupon')['coupon_code'];
-            $order->coupon_discount = Session::get('coupon')['amount'];
+            $data['coupon_code'] = Session::get('coupon')['coupon_code'];
+            $data['coupon_discount'] = Session::get('coupon')['amount'];
          }
-          $order->subtotal = $request->subtotal;
+          $data['subtotal'] = $request->subtotal;
 
-          $order->total = $request->total;
+          $data['total'] = $request->total;
 
-          $order->payment_type = $request->payment_type;
+          $data['payment_type'] = $request->payment_type;
 
-          $order->date = date('Y-m-d');
+          $data['date'] = date('Y-m-d');
 
-          $order->status = 0;
+          $data['status'] = 0;
 
-          $order->save();
+          $orderId = Order::insertGetId($data);
+
 
           //order details insert
           $cartproducts = ShoppingCart::where('user_id',Auth::user()->id)->get();
 
           foreach($cartproducts as $product){
             Orderdetails::insert([
-                'order_id' => $order->id,
+                'order_id' => $orderId,
                 'product_id' => $product->product_id,
                 'product_quantity' => $product->quantity,
                 'price' => $product->product->selling_price,
@@ -110,6 +113,17 @@ class CheckoutController extends Controller
                 'size' => $product->size,
             ]);
           }
+
+          //coupon destroy
+          if(Session('coupon')){
+            Session::forget('coupon');
+           }
+
+           //shopping cart empty
+           ShoppingCart::where('user_id',Auth::user()->id)->delete();
+
+           //mail sending to customer email
+           Mail::to($request->c_email)->send(new OrderMail($data));
 
           return redirect()->back()->with('message','Your order has been successfully submitted');
     }//end method
