@@ -35,10 +35,11 @@
 
                                 <div class="col-sm-4 p-4">
                                     <label>Product Filter with Status</label>
-                                    <select name="status" id="status" class="form-control">
+                                    <select name="status" id="status"  class="form-control">
                                         <option value="" selected disabled>Select</option>
                                                 <option value="1">Active</option>
                                                 <option value="0">Deactive</option>
+
                                     </select>
                                 </div>
                         </div>
@@ -190,20 +191,22 @@
     $(document).ready(function(){
         $('#status').on('change',function(){
             let status = $(this).val();
-           // alert(status);
+            //alert(status);
 
             $.ajax({
                 url:'/admin/product/filter/by-status',
                 method:'GET',
                 data:{status:status},
                 success:function(data){
-
+//console.log(data);
                     $('.filter_result').html(data);
 
                     if(data.status=='No data found'){
                         $('.filter_result').html('<h3 class="text-danger text-center" style="font-weight:bold;">'+'No data found.......'+'</h3>');
                     }
 
+                },error:function(error){
+                    alert('fail');
                 }
             });
         })

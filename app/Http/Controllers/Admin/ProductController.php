@@ -163,15 +163,22 @@ class ProductController extends Controller
 
     //product filter by status
     public function filterByStatus(Request $request){
-        $products = Product::where('status',$request->status)->get();
+       
+             $result = Product::where('status',$request->status)->get();
 
-        if(count($products)>0){
-            return view('admin.product.filter_by_category',compact('products'))->render();
+        if(count($result)>0){
+            // return response()->json([
+            //     'result'=>$result,
+            // ]);
+
+            return view('admin.product.filter_by_status',compact('result'))->render();
         } else{
             return response()->json([
                 'status'=>'No data found',
             ]);
         }
+       
+       
     }//end method
 
 
