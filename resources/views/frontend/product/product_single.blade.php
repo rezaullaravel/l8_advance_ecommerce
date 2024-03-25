@@ -300,9 +300,7 @@ Product Single Page
                         <p>{{ $relatedProduct->name }}</p>
                         <h6 style="margin:15px 0;">{{ $relatedProduct->selling_price  }} TK.</h6>
                     </div>
-                    <div class="add">
-                        <button class="btn btn-danger my-cart-btn my-cart-b" data-id="5" data-name="Lays" data-summary="summary 5" data-price="0.70" data-quantity="1" data-image="images/of4.png">Add to Cart</button>
-                    </div>
+
                 </div>
                 </div>
             </div>
