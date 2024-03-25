@@ -1,23 +1,25 @@
 <div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-top: 10px;">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-      <div class="item active">
-       <a href="kitchen.html"> <img class="first-slide" src="{{asset('/')}}frontend/images/ba.jpg" alt="First slide"></a>
+
+
+    @php
+        $sliders = DB::table('sliders')->get();
+        $first = 'true';
+    @endphp
+
+     <div class="carousel-inner" role="listbox">
+        @foreach ($sliders as $row)
+          <div class="item {{ $first ? 'active':'' }}">
+
+            <img class="first-slide" src="{{ asset($row->image) }}" alt="slide">
+
+           </div>
+            @php
+              $first = false;
+            @endphp
+        @endforeach
+
+
 
       </div>
-      <div class="item">
-       <a href="care.html"> <img class="second-slide " src="{{asset('/')}}frontend/images/ba1.jpg" alt="Second slide"></a>
-
-      </div>
-      <div class="item">
-        <a href="hold.html"><img class="third-slide " src="{{asset('/')}}frontend/images/ba2.jpg" alt="Third slide"></a>
-
-      </div>
-    </div>
 
   </div>

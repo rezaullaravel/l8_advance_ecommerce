@@ -189,6 +189,32 @@
               </li>
             </ul>
           </li>
+
+          {{-- slider start --}}
+          <li class="nav-item {{ (request()->is('admin/slider*')) ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ (request()->is('admin/slider*')) ? 'active' : '' }}">
+                <i class="nav-icon fas fa-solid fa-copyright"></i>
+              <p>
+                Slider
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="{{ (request()->is('admin/slider*')) ? 'display:block; overflow:hidden;' : 'display:none; overflow:hidden;' }} ">
+              <li class="nav-item">
+                <a  href="{{ route('admin.slider.add') }}"  class=" nav-link {{ (request()->is('admin/slider/add')) ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Slider</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.slider.manage') }}" class="nav-link {{ (request()->is('admin/slider/manage')) ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Manage Slider</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {{-- slider end --}}
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\WarehouseController;
@@ -124,6 +125,15 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::get('/today-deal/deactive/{id}',[ProductController::class,'productDealDeactive']);
     Route::get('/today-deal/active/{id}',[ProductController::class,'productDealActive']);
     Route::get('/multiImg/delete/{id}',[ProductController::class,'ProductMultiImgDelete']);
+
+
+    //slider
+    Route::get('/slider/add',[SliderController::class,'add'])->name('admin.slider.add');
+    Route::post('/slider/store',[SliderController::class,'store'])->name('admin.slider.store');
+    Route::get('/slider/manage',[SliderController::class,'manage'])->name('admin.slider.manage');
+    Route::get('/slider/edit/{id}',[SliderController::class,'edit'])->name('admin.slider.edit');
+    Route::post('/slider/update',[SliderController::class,'update'])->name('admin.slider.update');
+    Route::get('/slider/delete/{id}',[SliderController::class,'delete'])->name('admin.slider.delete');
 
 
 });
