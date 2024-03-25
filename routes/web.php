@@ -37,7 +37,7 @@ Route::get('/admin/login',[LoginController::class,'showAdminLoginForm']);
 Route::post('/admin/login',[LoginController::class,'adminLogin'])->name('admin.login');
 
 
-Route::prefix('admin')->middleware('admin')->group(function () {
+Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::get('/dashboard',[AdminController::class,'adminDashboard'])->name('admin.dashboard');
     Route::get('/logout',[AdminController::class,'adminLogout'])->name('admin.logout');
 

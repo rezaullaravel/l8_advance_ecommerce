@@ -20,6 +20,26 @@ Shopping Cart
   overflow: hidden;
 }
 
+table.table {
+    width: 100%;
+    border: none !important;
+}
+
+.card-sample {
+    width: 100%;
+    background: #F1F1F1;
+    padding: 0 !important;
+    border-radius: 1rem;
+    border: 1px solid #00000021;
+    overflow: hidden;
+
+    margin-top:20px;
+}
+.table {
+    width: 100%;
+    margin-bottom: 0px !important;
+}
+
 </style>
 <!--banner-->
 <div class="banner-top" style="margin-top: 15px;">

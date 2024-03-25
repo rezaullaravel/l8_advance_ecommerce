@@ -16,15 +16,15 @@ class Product extends Model
 
 
 public function category(){
-    return $this->belongsTo(Category::class);
+    return $this->belongsTo(Category::class)->withDefault();
 }
 
 public function subcategory(){
-    return $this->belongsTo(Subcategory::class);
+    return $this->belongsTo(Subcategory::class)->withDefault();
 }
 
 public function childcategory(){
-    return $this->belongsTo(Childcategory::class,'childcategory_id');
+    return $this->belongsTo(Childcategory::class,'childcategory_id')->withDefault();
 }
 
 public function brand(){
