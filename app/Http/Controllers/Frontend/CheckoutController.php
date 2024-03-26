@@ -65,39 +65,42 @@ class CheckoutController extends Controller
 
         $data = [];
         //order insert
-        //   $data['user_id'] = Auth::user()->id;
+          $data['user_id'] = Auth::user()->id;
 
-        //   $data['c_name'] = Auth::user()->name;
+          $data['c_name'] = Auth::user()->name;
 
-        //   $data['c_phone'] = $request->c_phone;
+          $data['c_phone'] = $request->c_phone;
 
-        //   $data['c_country'] = $request->c_country;
+          $data['c_country'] = $request->c_country;
 
-        //   $data['c_shipping_address'] = $request->c_shipping_address;
+          $data['c_shipping_address'] = $request->c_shipping_address;
 
-        //   $data['c_email'] = $request->c_email;
+          $data['c_email'] = $request->c_email;
 
-        //   $data['c_zipcode'] = $request->c_zipcode;
+          $data['c_zipcode'] = $request->c_zipcode;
 
-        //   $data['c_extra_phone'] = $request->c_extra_phone;
+          $data['c_extra_phone'] = $request->c_extra_phone;
 
-        //   $data['c_city'] = $request->c_city;
+          $data['c_city'] = $request->c_city;
 
-        //  if(Session('coupon')){
-        //     $data['coupon_code'] = Session::get('coupon')['coupon_code'];
-        //     $data['coupon_discount'] = Session::get('coupon')['amount'];
-        //  }
-        //   $data['subtotal'] = $request->subtotal;
+         if(Session('coupon')){
+            $data['coupon_code'] = Session::get('coupon')['coupon_code'];
+            $data['coupon_discount'] = Session::get('coupon')['amount'];
+         }
+          $data['subtotal'] = $request->subtotal;
 
-        //   $data['total'] = $request->total;
+          $data['total'] = $request->total;
 
-        //   $data['payment_type'] = $request->payment_type;
+          $data['payment_type'] = $request->payment_type;
 
-        //   $data['date'] = date('Y-m-d');
+          $data['date'] = date('Y-m-d');
+          $data['day'] = date('d');
+          $data['month'] = date('m');
+          $data['year'] = date('Y');
 
-        //   $data['status'] = 0;
+          $data['status'] = 0;
 
-        //   $orderId = Order::insertGetId($data);
+          $orderId = Order::insertGetId($data);
 
 
           //order details insert

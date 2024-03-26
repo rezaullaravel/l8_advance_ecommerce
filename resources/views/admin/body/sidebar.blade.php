@@ -215,6 +215,26 @@
             </ul>
           </li>
           {{-- slider end --}}
+
+          {{-- order start --}}
+          <li class="nav-item {{ (request()->is('admin/order*')) ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ (request()->is('admin/order*')) ? 'active' : '' }}">
+                <i class="nav-icon fas fa-solid fa-copyright"></i>
+              <p>
+                Order
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="{{ (request()->is('admin/order*')) ? 'display:block; overflow:hidden;' : 'display:none; overflow:hidden;' }} ">
+              <li class="nav-item">
+                <a  href="{{ route('admin.order.all') }}"  class=" nav-link {{ (request()->is('admin/order/all')) ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Order</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {{-- order end --}}
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

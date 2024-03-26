@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\WarehouseController;
 use App\Http\Controllers\Frontend\ReviewController;
+use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\PickupPointController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Frontend\CheckoutController;
@@ -134,6 +135,12 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::get('/slider/edit/{id}',[SliderController::class,'edit'])->name('admin.slider.edit');
     Route::post('/slider/update',[SliderController::class,'update'])->name('admin.slider.update');
     Route::get('/slider/delete/{id}',[SliderController::class,'delete'])->name('admin.slider.delete');
+
+
+    //order
+    Route::get('/order/all',[AdminOrderController::class,'allOrder'])->name('admin.order.all');
+    Route::get('/order/status-change/{id}',[AdminOrderController::class,'changeOrderStatus'])->name('admin.order-status.change');
+    Route::post('/order/status-update',[AdminOrderController::class,'updateOrderStatus'])->name('admin.order-status.update');
 
 
 });
