@@ -17,8 +17,10 @@ use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Admin\ChildcategoryController;
+use App\Http\Controllers\Frontend\FrontContactController;
 use App\Http\Controllers\Frontend\FrontendHomeController;
 use App\Http\Controllers\Frontend\ShoppingCartController;
+use App\Http\Controllers\Admin\AdminContactMessageController;
 
 
 
@@ -141,6 +143,16 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::get('/order/all',[AdminOrderController::class,'allOrder'])->name('admin.order.all');
     Route::get('/order/status-change/{id}',[AdminOrderController::class,'changeOrderStatus'])->name('admin.order-status.change');
     Route::post('/order/status-update',[AdminOrderController::class,'updateOrderStatus'])->name('admin.order-status.update');
+    Route::get('/order/details/{id}',[AdminOrderController::class,'orderDetails'])->name('admin.order-details');
+    Route::get('/order/delete/{id}',[AdminOrderController::class,'orderDelete'])->name('admin.order-delete');
+
+
+    //contact message
+    Route::get('/contact/all',[AdminContactMessageController::class,'show'])->name('admin.contact.all');
+    Route::get('/message/view/{id}',[AdminContactMessageController::class,'viewMessage'])->name('admin.message.view');
+
+    //delete multiple message
+    Route::post('/delete',[AdminContactMessageController::class,'delete'])->name('delete');
 
 
 });
@@ -152,6 +164,9 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
 
 //home page
 Route::get('/',[FrontendHomeController::class,'index']);
+
+//about us page
+Route::get('/',[FrontendHomeController::class,'aboutUs'])->name('about');
 
 //product single page
 Route::get('/product/single/{id}',[FrontendHomeController::class,'productSingle']);
@@ -191,5 +206,10 @@ Route::get('/checkout',[CheckoutController::class,'checkout']);
 Route::post('/apply/coupon',[CheckoutController::class,'applyCoupon']);
 Route::get('/coupon/remove',[CheckoutController::class,'removeCoupon']);
 Route::post('/place/order',[CheckoutController::class,'placeOrder']);
+
+
+//contact us
+Route::get('/contact/us',[FrontContactController::class,'index'])->name('contact');
+Route::post('/insert/message',[FrontContactController::class,'insertMessage'])->name('insert.message');
 
 /*===================================== Frontend all route end   ==============================================*/

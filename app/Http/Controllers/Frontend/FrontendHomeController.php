@@ -55,6 +55,12 @@ class FrontendHomeController extends Controller
     }//end method
 
 
+    //about us page
+    public function aboutUs(){
+        return view('frontend.about.about');
+    }//end method
+
+
 
 
 

@@ -235,6 +235,27 @@
             </ul>
           </li>
           {{-- order end --}}
+
+
+          {{-- contact us start --}}
+          <li class="nav-item {{ (request()->is('admin/contact*')) ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ (request()->is('admin/contact*')) ? 'active' : '' }}">
+                <i class="nav-icon fas fa-solid fa-copyright"></i>
+              <p>
+                Contact
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="{{ (request()->is('admin/contact*')) ? 'display:block; overflow:hidden;' : 'display:none; overflow:hidden;' }} ">
+              <li class="nav-item">
+                <a  href="{{ route('admin.contact.all') }}"  class=" nav-link {{ (request()->is('admin/contact/all')) ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Contact Message</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {{-- contact us end --}}
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

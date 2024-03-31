@@ -4,7 +4,7 @@
  <div class="content">
     <div class="container-fluid">
         <div class="row">
-          <div class="col-sm-10 offset-sm-1">
+          <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <form action="{{ route('admin.order.all') }}" method="GET">
@@ -42,7 +42,7 @@
           </div>
         </div>{{-- row end --}}
         <div class="row">
-            <div class="col-sm-10 offset-sm-1">
+            <div class="col-sm-12">
                 {{-- data table --}}
                    <div class="card card-primary">
                       <div class="card-header">
@@ -92,9 +92,11 @@
                                     </td>
 
                                     <td>
-                                        <a href="" class="btn btn-success btn-sm" title="View order details"><i class="fa fa-eye"></i></a>
+                                        <a href="{{ route('admin.order-details',$row->id) }}" class="btn btn-success btn-sm" title="View order details"><i class="fa fa-eye"></i></a>
 
                                         <a href="{{ route('admin.order-status.change',$row->id) }}" class="btn btn-info btn-sm" title="Edit order staus"><i class="fa fa-pen"></i></a>
+
+                                        <a href="{{ route('admin.order-delete',$row->id) }}" class="btn btn-danger btn-sm" onclick="confirmation(event)" title="delete"><i class="fa fa-trash"></i></a>
 
                                     </td>
                                   </tr>

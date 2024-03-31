@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Mail;
 use App\Models\Order;
+use App\Models\Orderdetails;
 use Illuminate\Http\Request;
 use App\Mail\ReceiveOrderMail;
 use App\Http\Controllers\Controller;
-use Mail;
 
 class AdminOrderController extends Controller
 {
@@ -81,5 +82,22 @@ class AdminOrderController extends Controller
         }
 
         return redirect()->route('admin.order.all')->with('message','Order status changed successfully');
+    }//end method
+
+
+    //order details
+    public function orderDetails($id){
+        $order = Order::find($id);
+        $orderDetails = Orderdetails::where('order_id',$id)->get();
+        return view('admin.order.order_details',compact('order','orderDetails'));
+    }//end method
+
+
+    //order delete
+    public function orderDelete($id){
+        $order = Order::find($id);
+        $order->orderDetails()->delete();
+        $order->delete();
+        return redirect()->back()->with('message','Order deleted successfully');
     }//end method
 }//end method
