@@ -166,7 +166,7 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
 Route::get('/',[FrontendHomeController::class,'index']);
 
 //about us page
-Route::get('/',[FrontendHomeController::class,'aboutUs'])->name('about');
+Route::get('/about-us',[FrontendHomeController::class,'aboutUs'])->name('about');
 
 //product single page
 Route::get('/product/single/{id}',[FrontendHomeController::class,'productSingle']);
